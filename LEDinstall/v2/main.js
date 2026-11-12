@@ -117,8 +117,6 @@ function buildWordTextures() {
     const cv = document.createElement("canvas");
     cv.width = cv.height = S;
     const g = cv.getContext("2d");
-    g.fillStyle = "#000";
-    g.fillRect(0, 0, S, S);
     g.fillStyle = "#fff";
     g.font = `${size}px "Archivo Black"`;
     g.textAlign = "center";
@@ -139,7 +137,7 @@ function buildWordTiles() {
   for (const set of ["prev", "curr"]) {
     wordTiles[set].forEach((m) => scene.remove(m));
     wordTiles[set] = WORDS.map((_, i) => {
-      const m = new THREE.Mesh(tileGeo, new THREE.MeshBasicMaterial({ map: wordTextures[i], toneMapped: false }));
+      const m = new THREE.Mesh(tileGeo, new THREE.MeshBasicMaterial({ map: wordTextures[i], toneMapped: false, transparent: true, depthWrite: false }));
       m.position.y = 0.002;
       m.visible = false;
       scene.add(m);
